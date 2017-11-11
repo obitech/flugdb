@@ -35,7 +35,7 @@ Check if your container is up:
 ```bash
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
-22a9803261ce        mariadb:latest      "docker-entrypoint..."   8 minutes ago       Up 15 seconds        3306/tcp            flugdb
+22a9803261ce        mariadb:latest      "docker-entrypoint..."   14 seconds ago       Up 15 seconds        3306/tcp            flugdb
 ```
 Make sure to shutdown your container after you're done working with it:
 ```bash
@@ -95,6 +95,13 @@ MariaDB [flug]> SELECT * FROM pilot;
 |  194 | Fritz Wandel    | 1977-01-03 | Pilot      |   1117 |
 +------+-----------------+------------+------------+--------+
 18 rows in set (0.00 sec)
+```
+You can leave the ``mysql`` CLI with CTRL+C and exit the container with ``exit``
+```bash
+MariaDB [flug]> Ctrl-C -- exit!
+Aborted
+root@96e87116c32a:/# exit
+exit
 ```
 ### Using a DB Management System
 You can use a Database Management System such as DBeaver or MySQL Workbench to work with your DB. For this we will use DBeaver.
