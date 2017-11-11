@@ -1,44 +1,44 @@
 # TUC 'Grundlagen Datenbanken' Practice Database
-This is a Docker MariaDB container with the provided database model applied. You need Linux or macOS, Windows supported not test.
+This is a Docker [MariaDB container](https://hub.docker.com/_/mariadb/) with the provided database model applied.
 ## Environment
 Setting | Value | Usage | Environment variable
 ---|---|---|---
 Database | flug | Name of our database | MYSQL_DATABASE=flug
 User | tuc | Custom MySQL user | MYSQL_USER=tuc
-Password | tuc | Password for our custom user | MYSQL_PASSWORD
+Password | tuc | Password for our custom user | MYSQL_PASSWORD=tuc
 Root password | root | Password for MySQL root user | MYSQL_ROOT_PASSWORD=root
 
 ## Setup
 ### Install Docker
-[Link to install](about:blank)
+Install Docker for [Ubuntu](https://docs.docker.com/engine/installation/), [Deabian](https://docs.docker.com/engine/installation/linux/docker-ce/debian/) or [macOS](https://docs.docker.com/docker-for-mac/install/). If you're running Linux you also have  to install [Docker Compose](https://docs.docker.com/compose/install/#prerequisites).
 ### Clone repo
-In your terminal, navigate to the folder where you want this repo set up and then type:
-```bash
-$ git clone <...>
+Open a terminal, navigate to the folder where you want this repo set up and then type:
+```
+$ git clone https://github.com/obitech/flugdb
 $ cd flugdb/
 ```
-### Launch container
-This command will launch the container as a daemon in the background:
-```bash
-# Make sure you're in the flugdb/ folder
+### Start container
+In your terminal, make sure you're in the ``flugdb/`` folder, then start the container with ``docker-compose up -d`` to let it run in the background.
+```
 $ docker-compose up -d
 Creating network "flugdb_default" with the default driver
 Creating flugdb ...
 Creating flugdb ... done
 ```
-If you want to follow the startup logs you can type this:
-```bash
-# Get out of log view anytime whit CTRL+C
+
+You can see logs with ``docker-compose logs`` and ``docker-compose logs -f`` (-f for follow, leave view with CTRL+C).
+```
 $ docker-compose up -d && docker-compose logs -f
 ```
-Check if your container is up:
-```bash
+Check with ``docker ps`` if your container is running.
+```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
 22a9803261ce        mariadb:latest      "docker-entrypoint..."   14 seconds ago       Up 15 seconds        3306/tcp            flugdb
 ```
-Make sure to shutdown your container after you're done working with it:
-```bash
+### Stop container
+Use ``docker-compose down`` to shutdown your container after you're done working with it (if you're connected to your container type ``exit`` first).
+```
 $ docker-compose down
 Stopping flugdb ... done
 Removing flugdb ... done
@@ -49,12 +49,12 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ## Sending SQL statements 
 ### Using ``mysql`` CLI
 First connect to your container:
-```bash
+```
 $ docker exec -it flugdb bash
 root@22a9803261ce:/#
 ```
-Then connect to your database (when prompted for a password, enter **tuc***):
-```bash
+Then connect to your database (when prompted for a password, enter **tuc**):
+```
 root@22a9803261ce:/# mysql --user tuc --password flug
 Enter password:
 Reading table information for completion of table and column names
@@ -70,7 +70,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 MariaDB [flug]>
 ```
 Finally, send your statement:
-```bash
+```
 MariaDB [flug]> SELECT * FROM pilot;
 +------+-----------------+------------+------------+--------+
 | pinr | name            | gebdat     | quali      | flug_h |
@@ -97,21 +97,21 @@ MariaDB [flug]> SELECT * FROM pilot;
 18 rows in set (0.00 sec)
 ```
 You can leave the ``mysql`` CLI with CTRL+C and exit the container with ``exit``
-```bash
+```
 MariaDB [flug]> Ctrl-C -- exit!
 Aborted
 root@96e87116c32a:/# exit
 exit
 ```
 ### Using a DB Management System
-You can use a Database Management System such as DBeaver or MySQL Workbench to work with your DB. For this we will use DBeaver.
+You can use a Database Management System such as [DBeaver](https://dbeaver.jkiss.org/download/) or [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) to work with your DB. For this we will use DBeaver.
 1. Start DBeaver and click on Database > New Connection
 2. Choose MariaDB as driver
 3. Enter credentials
-** Host: localhost
-** Port: 3306
-** Database: flug
-** User name: tuc
-** Password: tuc
+ * Host: localhost
+  * Port: 3306
+  * Database: flug
+  * User name: tuc
+  * Password: tuc
 4. Click Test Connection and download MariaDB driver, if necessary
 5. Complete Setup wizard
