@@ -10,7 +10,7 @@ services:
       - MYSQL_PASSWORD=tuc
     volumes:
       - "./data/flugdb/data:/var/lib/mysql"
-      - "./entrypoint:/docker-entrypoint-initdb.d"
+      - "./dumps:/docker-entrypoint-initdb.d"
     expose:
       - 3306
     ports:
