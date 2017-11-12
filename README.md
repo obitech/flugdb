@@ -1,7 +1,7 @@
 # TUC 'Grundlagen Datenbanken' Practice Database
-This is a Docker [MariaDB container](https://hub.docker.com/_/mariadb/) with the provided database model applied. Docker lets you run the database server in an isolated environment without having to install MySQL Server or PostGres (+ dependencies) on your system. It's not exposed to the internet, so once the container is up it will be reachable under ``localhost`` (or ``127.0.0.1``) and port ``3006``. Your database will be located in ``flugdb/data`` on your system and mapped inside the container, so changes to the flug database will persist. 
+This is a Docker [MariaDB container](https://hub.docker.com/_/mariadb/) with the provided database model applied. Docker lets you run the database server in an isolated environment without having to install MySQL Server or PostGres (+ dependencies) on your system. Once the container is up it can be reached under ``localhost`` (or ``127.0.0.1``) and port ``3306``. 
 
-The container itself is stateless, meaning any changes affecting the database **server** (configuration parameters, new users, etc) will be gone after you stop or restart the container. 
+Your database will be located in ``flugdb/data`` on your system and mapped inside the container, so changes to the flug database will persist. The container itself is stateless, meaning any changes affecting the database **server** (configuration parameters, new users, etc) will be gone after you stop or restart the container. 
 ## Environment
 Setting | Value | Usage | Environment variable
 ---|---|---|---
@@ -119,3 +119,5 @@ You can use a Database Management System such as [DBeaver](https://dbeaver.jkiss
   * Password: tuc
 4. Click Test Connection and download MariaDB driver, if necessary
 5. Complete Setup wizard
+## DB Scheme
+![a database scheme](https://raw.githubusercontent.com/obitech/flugdb/master/static/dbscheme_flugdb.png "Database scheme for flug")
