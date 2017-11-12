@@ -3,6 +3,8 @@ This is a Docker [MariaDB container](https://hub.docker.com/_/mariadb/) with the
 ## Environment
 Setting | Value | Usage | Environment variable
 ---|---|---|---
+Hostname | localhost (127.0.0.1) | The address your db server will be reachable under | -
+Port | 3306 | The port your db server will be reachable under | -
 Database | flug | Name of our database | MYSQL_DATABASE=flug
 User | tuc | Custom MySQL user | MYSQL_USER=tuc
 Password | tuc | Password for our custom user | MYSQL_PASSWORD=tuc
@@ -14,7 +16,7 @@ Install Docker for [Ubuntu](https://docs.docker.com/engine/installation/), [Deab
 ### Clone repo
 Open a terminal, navigate to the folder where you want this repo set up and then type:
 ```
-$ git clone https://github.com/obitech/flugdb
+$ git clone https://github.com/obitech/flugdb.git
 $ cd flugdb/
 ```
 ### Start container
@@ -53,7 +55,7 @@ First connect to your container:
 $ docker exec -it flugdb bash
 root@22a9803261ce:/#
 ```
-Then connect to your database (when prompted for a password, enter **tuc**):
+Then, inside your container, connect to the MariaDB server and flug database with ``mysql --user tuc --password flug``. When prompted for a password, enter **tuc**.
 ```
 root@22a9803261ce:/# mysql --user tuc --password flug
 Enter password:
